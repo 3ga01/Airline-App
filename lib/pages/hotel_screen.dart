@@ -7,14 +7,18 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:gap/gap.dart';
 
 class HotelScreen extends StatelessWidget {
-  const HotelScreen({super.key});
+  final Map<String, dynamic> hotel;
+
+  const HotelScreen({super.key, required this.hotel});
 
   @override
   Widget build(BuildContext context) {
+    print('Hotel price is ${hotel['price']}');
+
     final size = AppLayout.getSize(context);
     return Container(
       width: size.width * 0.6,
-      height: 350,
+      height: 300,
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 17),
       margin: const EdgeInsets.only(right: 17, top: 5),
       decoration: BoxDecoration(
@@ -22,12 +26,12 @@ class HotelScreen extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               color: Colors.grey.shade200,
-              blurRadius: 2,
-              spreadRadius: 1,
+              blurRadius: 20,
+              spreadRadius: 5,
             ),
           ],
           color: Styles.primaryColor),
-      child: Column(children: [
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Container(
           height: 180,
           decoration: BoxDecoration(
@@ -35,19 +39,19 @@ class HotelScreen extends StatelessWidget {
               color: Styles.primaryColor,
               image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage("assets/images/one.png"))),
+                  image: AssetImage("assets/images/${hotel['image']}"))),
         ),
-        const Gap(15),
+        const Gap(10),
         Text(
-          "Open Space",
+          "${hotel['place']}",
           style: Styles.headLineStyle2.copyWith(color: Styles.kakiColor),
         ),
         Text(
-          "London",
+          "${hotel['destination']}",
           style: Styles.headLineStyle3.copyWith(color: Colors.white),
         ),
         Text(
-          "\$40/night",
+          "\$${hotel['price']}",
           style: Styles.headLineStyle1.copyWith(color: Styles.kakiColor),
         ),
       ]),
